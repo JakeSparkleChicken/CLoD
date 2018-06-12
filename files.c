@@ -15,7 +15,7 @@
 
 FILE* fileOpen(char* filename) {
 	FILE* fp;
-	fp = fopen(filename, "+w");
+	fp = fopen(filename, "w+");
 	return fp;
 }
 void fileClose(FILE* filename) {

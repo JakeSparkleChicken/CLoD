@@ -15,7 +15,6 @@ int main() {
 	contact* contactList = createList();
 	char* filename = getFilename();
 	FILE* file = fileOpen(filename);
-	//contact** head = contactList;
 	contactsFromLines(file, &contactList);
 	while (1) {
 		if (getCommand(file, &contactList) == 1) {

@@ -41,7 +41,7 @@ int getCommand(FILE* file, contact** head) {
 		createContact(head, getNewContact());
 		return 0;
 	}
-	if (com == 's') {
+	if (com == 'S') {
 		char sname[32];
 		printf("\nEnter name to search: \n");
 		scanf("%s", sname);
@@ -57,7 +57,7 @@ void displayContact(contact* c) {
 	printf("Phone number: %s\n", c->number);
 }
 char* getFilename() {
-	char filename[40];
+	static char filename[40];
 	printf("Enter filename of contact list:\n");
 	scanf("%s", filename);
 	return filename;
