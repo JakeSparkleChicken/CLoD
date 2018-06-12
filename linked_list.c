@@ -23,11 +23,6 @@ void createContact(contact** headRef, contact* new) {
 		prev = head;
 		head = head->next;
 	}
-	//contact* newNode;
-	//newNode->fname = new->fname;
-	//newNode->lname = new->lname;
-	//newNode->email = new->email;
-	//newNode->number = new->number;
 	if (prev!= NULL) {
 		prev->next = new;
 	}
