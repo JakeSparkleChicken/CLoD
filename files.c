@@ -9,6 +9,9 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include "io.h"
+#include "files.h"
 
 FILE* fileOpen(char* filename) {
 	FILE* fp;
@@ -18,14 +21,15 @@ FILE* fileOpen(char* filename) {
 void fileClose(FILE* filename) {
 	fclose(filename);
 }
-void ContactsFromLines(FILE* file, contact** headRef) {
+void contactsFromLines(FILE* file, contact** headRef) {
 	assert(file != NULL && headRef != NULL);
 	char ch;
-	char* str[32];
+	char str[32];
+	contact* head = *headRef;
 	while (1) {
 		ch = fgetc(file);
 		if (ch == EOF) {
-			*headRef->next = NULL;
+			head->next = NULL;
 			break;
 		}
 		while (1) {
@@ -41,7 +45,7 @@ void ContactsFromLines(FILE* file, contact** headRef) {
 				i++;
 				ch = fgetc(file);
 			}
-			*headRef->fname = str;
+			strcat(head->fname, str);
 			while (1) {
 				if (ch == '\t') {
 					break;
@@ -50,7 +54,7 @@ void ContactsFromLines(FILE* file, contact** headRef) {
 				i++;
 				ch = fgetc(file);
 			}
-			*headRef->lname = str;
+			strcat(head->lname, str);
 			while (1) {
 				if (ch == '\t') {
 					break;
@@ -59,7 +63,7 @@ void ContactsFromLines(FILE* file, contact** headRef) {
 				i++;
 				ch = fgetc(file);
 			}
-			*headRef->email = str;
+			strcat(head->email, str);
 			while (1) {
 				if (ch == '\t') {
 					break;
@@ -68,26 +72,29 @@ void ContactsFromLines(FILE* file, contact** headRef) {
 				i++;
 				ch = fgetc(file);
 			}
-			*headRef->number = str;
-			*headRef->next = (contact*)malloc(sizeof(contact));
-			*headRef = *headRef->next;
+			strcat(head->number, str);
+			head->next = (contact*)malloc(sizeof(contact));
+			head = head->next;
 		}
 
 	}
 }
 void contactToLine(contact** headRef, FILE* file) {
 	assert (headRef != NULL);
-	char* line[255];
-	while (*headRef != NULL) {
-		line = *headRef->fname;
-		strcat(line, '\t');
-		strcat(line, *headRef->lname);
-		strcat(line, '\t');
-		strcat(line, *headRef->email);
-		strcat(line, '\t');
-		strcat(line, *headRef->number);
-		strcat(line, '\n');
-		*headRef = *headRef->next;
+	char* line;
+	contact* head = *headRef;
+	while (head != NULL) {
+		char tab = '\t';
+		char newln = '\n';
+		line = (head->fname);
+		strcat(line, &tab);
+		strcat(line, head->lname);
+		strcat(line, &tab);
+		strcat(line, head->email);
+		strcat(line, &tab);
+		strcat(line, head->number);
+		strcat(line, &newln);
+		head = (head->next);
 		fputs(line, file);
 	}
 }

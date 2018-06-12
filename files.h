@@ -7,10 +7,13 @@
 
 #ifndef FILES_H_
 #define FILES_H_
+#include "linked_list.h"
+#include <stdio.h>
+
 
 FILE* fileOpen(char* filename);
 void fileClose(FILE* filename);
 void contactsFromLines(FILE* file, contact** headRef);
-void contactsToLines(contact** headRef, FILE* file);
+void contactToLine(contact** headRef, FILE* file);
 
 #endif /* FILES_H_ */

@@ -7,10 +7,12 @@
 
 #ifndef IO_H_
 #define IO_H_
+#include "linked_list.h"
+#include <stdio.h>
 
 contact* getNewContact();
-char* getCommand();
-void displayContact();
+int getCommand(FILE* file, contact** head);
+void displayContact(contact* c);
 char* getFilename();
 char* contactToFind();
 

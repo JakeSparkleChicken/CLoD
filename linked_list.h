@@ -12,13 +12,13 @@ typedef struct ContactElement{
 	char fname[32];
 	char lname[32];
 	char email[32];
-	int number;
+	char number[16];
 	struct ContactElement* next;
 }contact;
 
 contact* createList();
-void createContact(contact** headRef, contact new);
-contact* fetchContact(contact** headRef, char* name);
+void createContact(contact** headRef, contact* new);
+void fetchContact(contact** headRef, char* name);
 contact* sortByNumber(contact** headRef, char* number);
 contact* sortByEmail(contact** headRef, char* email);
 contact* deleteContact(contact** headRef, char* name);

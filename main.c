@@ -12,9 +12,15 @@
 #include "io.h"
 
 int main() {
-	contact* contactList = createList;
+	contact* contactList = createList();
 	char* filename = getFilename();
 	FILE* file = fileOpen(filename);
-	contact** head = contactList;
-	contactsFromLines(file, head);
+	//contact** head = contactList;
+	contactsFromLines(file, &contactList);
+	while (1) {
+		if (getCommand(file, &contactList) == 1) {
+			break;
+		}
+	}
+
 }

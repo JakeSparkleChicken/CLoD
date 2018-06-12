@@ -7,37 +7,40 @@
 #include "linked_list.h"
 #include <assert.h>
 #include <stdio.h>
+#include <string.h>
+#include "io.h"
+#include <stdlib.h>
 
 contact* createList() {
-	contact* head;
+	contact* head = (contact *)malloc(sizeof(contact));
 	return head;
 }
 void createContact(contact** headRef, contact* new) {
 	assert (headRef != NULL && new != NULL);
-	struct node* head = *headRef;
-	struct node* prev = NULL;
+	contact* head = *headRef;
+	contact* prev = NULL;
 	while (head != NULL && new->lname > head->lname) {
 		prev = head;
 		head = head->next;
 	}
-	contact* newNode;
-	newNode->fname = new->fname;
-	newNode->lname = new->lname;
-	newNode->email = new->email;
-	newNode->number = new->number;
+	//contact* newNode;
+	//newNode->fname = new->fname;
+	//newNode->lname = new->lname;
+	//newNode->email = new->email;
+	//newNode->number = new->number;
 	if (prev!= NULL) {
-		prev->next = newNode;
+		prev->next = new;
 	}
 	else {
-		*headRef = newNode;
+		*headRef = new;
 	}
-	newNode->next = head;
+	new->next = head;
 }
 
 void fetchContact(contact** headRef, char* name) {
 	assert (headRef!= NULL && name != NULL);
-	contact* head = headRef;
-	while ((head != NULL) && ((*name != head->fname)||(*name != head->lname))) {
+	contact* head = *headRef;
+	while ((head != NULL) && ((strcmp(name, head->fname) !=0) || (strcmp(name, head->lname) != 0))) {
 		head = head->next;
 	}
 	if (head != NULL) {
