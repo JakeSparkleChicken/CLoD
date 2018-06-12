@@ -11,4 +11,10 @@
 #include "files.h"
 #include "io.h"
 
-
+int main() {
+	contact* contactList = createList;
+	char* filename = getFilename();
+	FILE* file = fileOpen(filename);
+	contact** head = contactList;
+	contactsFromLines(file, head);
+}

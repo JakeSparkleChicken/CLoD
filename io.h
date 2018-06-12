@@ -8,8 +8,10 @@
 #ifndef IO_H_
 #define IO_H_
 
-contact* getContact();
+contact* getNewContact();
 char* getCommand();
 void displayContact();
+char* getFilename();
+char* contactToFind();
 
 #endif /* IO_H_ */
