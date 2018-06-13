@@ -13,6 +13,12 @@
 
 contact* createList() {
 	contact* head = (contact *)malloc(sizeof(contact));
+	char nullarray[32] = {"\0"};
+	strcpy(head->fname, nullarray);
+	strcpy(head->lname, nullarray);
+	strcpy(head->email, nullarray);
+	strcpy(head->number, nullarray);
+	head->next = NULL;
 	return head;
 }
 void createContact(contact** headRef, contact* new) {
