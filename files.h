@@ -11,7 +11,8 @@
 #include <stdio.h>
 
 
-FILE* fileOpen(char* filename);
+FILE* fileOpenRead(char* filename);
+FILE* fileOpenWrite(char* filename);
 void fileClose(FILE* filename);
 void contactsFromLines(FILE* file, contact** headRef);
 void contactToLine(contact** headRef, FILE* file);

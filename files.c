@@ -13,9 +13,14 @@
 #include "io.h"
 #include "files.h"
 
-FILE* fileOpen(char* filename) {
+FILE* fileOpenWrite(char* filename) {
 	FILE* fp;
 	fp = fopen(filename, "w+");
+	return fp;
+}
+FILE* fileOpenRead(char* filename) {
+	FILE* fp;
+	fp = fopen(filename, "r");
 	return fp;
 }
 void fileClose(FILE* filename) {
@@ -78,25 +83,38 @@ void contactsFromLines(FILE* file, contact** headRef) {
 		}
 
 	}
+	fileClose(file);
 }
 void contactToLine(contact** headRef, FILE* file) {
 	assert (headRef != NULL);
-	char* line;
 	contact* head = *headRef;
 	while (head != NULL) {
 		char tab = '\t';
 		char newln = '\n';
-		line = (head->fname);
-		strcat(line, &tab);
-		strcat(line, head->lname);
-		strcat(line, &tab);
-		strcat(line, head->email);
-		strcat(line, &tab);
-		strcat(line, head->number);
-		strcat(line, &newln);
+		int i = 0;
+		for (i = 0; head->fname[i] != '\0'; i++)
+		{
+			fputc(head->fname[i], file);
+		}
+		fputc(tab, file);
+		for (i = 0; head->lname[i] != '\0'; i++)
+		{
+			fputc(head->lname[i], file);
+		}
+		fputc(tab, file);
+		for (i = 0; head->email[i] != '\0'; i++)
+		{
+			fputc(head->email[i], file);
+		}
+		fputc(tab, file);
+		for (i = 0; head->number[i] != '\0'; i++)
+		{
+			fputc(head->number[i], file);
+		}
+		fputc(newln, file);
 		head = (head->next);
-		fputs(line, file);
 	}
+	fileClose(file);
 }
 
 

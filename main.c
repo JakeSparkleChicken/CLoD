@@ -14,8 +14,12 @@
 int main() {
 	contact* contactList = createList();
 	char* filename = getFilename();
-	FILE* file = fileOpen(filename);
-	contactsFromLines(file, &contactList);
+	FILE* file = fileOpenRead(filename);
+	if (file != NULL)
+	{
+		contactsFromLines(file, &contactList);
+	}
+	file = fileOpenWrite(filename);
 	while (1) {
 		if (getCommand(file, &contactList) == 1) {
 			break;

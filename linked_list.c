@@ -19,6 +19,10 @@ contact* createList() {
 	strcpy(head->email, nullarray);
 	strcpy(head->number, nullarray);
 	head->next = NULL;
+	strcpy(head->fname, "First");
+	strcpy(head->lname, "Last");
+	strcpy(head->email, "Email");
+	strcpy(head->number, "Number");
 	return head;
 }
 void createContact(contact** headRef, contact* new) {
